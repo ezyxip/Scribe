@@ -2,7 +2,8 @@ import {supabase} from "./api-supabase"
 
 export class NotebookRepository {
     async create(name: string, userId: string): Promise<number | null> {
-      const { data, error } = await supabase.from('notebooks').insert([{ name, user_id: userId, cell_ids: [] }]).select().single();
+      const notebook = NotebookFactory.create(name, userId);
+      const { data, error } = await supabase.from('notebooks').insert([notebook]).select().single();
       if (error) {
         console.error('Ошибка при создании блокнота:', error.message);
         return null;
