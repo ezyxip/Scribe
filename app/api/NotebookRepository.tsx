@@ -1,4 +1,5 @@
 import {supabase} from "./api-supabase"
+import { NotebookFactory } from "~/Notebooks/NotebookFactory";
 
 export class NotebookRepository {
     async create(name: string, userId: string): Promise<number | null> {
