@@ -1,7 +1,5 @@
-import { Button } from "@mui/material";
+import { LowerSection } from "./dev_for_code";
 
-export default function Preview(){
-    return(
-        <Button variant="contained">Hehhehe</Button>
-    )
+export default function Preview() {
+  return <LowerSection />;
 }
