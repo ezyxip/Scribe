@@ -1,8 +1,5 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router";
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
-
 
 
 export function Welcome() {

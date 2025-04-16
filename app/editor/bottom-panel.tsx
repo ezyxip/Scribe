@@ -51,7 +51,7 @@ export default function BottomPanel(props: BottomPanelProps) {
                             fullWidth
                             autoFocus
                         />
-                        <IconButton onClick={toggleSearchPanel} sx={{ ml: 1 }}>
+                        <IconButton onClick={toggleSearchPanel} sx={{ ml: 1, borderRadius: 2, }}>
                             Закрыть
                         </IconButton>
                     </Box>
@@ -93,7 +93,7 @@ export default function BottomPanel(props: BottomPanelProps) {
                     px: 2,
                 }}
             >
-                <IconButton onClick={toggleSearchPanel} sx={{ mr: 2 }}>
+                <IconButton onClick={toggleSearchPanel} sx={{ mr: 2, borderRadius: 2, }}>
                     Найти
                 </IconButton>
 

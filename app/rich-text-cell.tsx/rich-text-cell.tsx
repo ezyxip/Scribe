@@ -58,26 +58,40 @@ export function RichTextCellTopPanel(props: CellProps) {
     function onClickHandler(value: string) {
         props.changeState({ ...props.state, aligment: value });
     }
+
+    const textStyle = {
+        color: "black",
+        fontWeight: "medium",
+        textTransform: "none",
+    };
+
     return [
-        <ToggleButtonGroup>
+        <ToggleButtonGroup key="align-group">
             <ToggleButton value="left" onClick={() => onClickHandler("left")}>
-                <Button variant="text">Лево</Button>
+                <Typography sx={textStyle}>Лево</Typography>
             </ToggleButton>
-            <ToggleButton
-                value="center"
-                onClick={() => onClickHandler("center")}
-            >
-                <Button variant="text">Центр</Button>
+            <ToggleButton value="center" onClick={() => onClickHandler("center")}>
+                <Typography sx={textStyle}>Центр</Typography>
             </ToggleButton>
             <ToggleButton value="right" onClick={() => onClickHandler("right")}>
-                <Button variant="text">Право</Button>
+                <Typography sx={textStyle}>Право</Typography>
             </ToggleButton>
         </ToggleButtonGroup>,
-        <ToggleButton value={"bold"} onClick={() => props.changeState({ ...props.state, isBold: !props.state.isBold })}>
-            <Button variant="text">Жирный</Button>
-        </ToggleButton>
+        <ToggleButton
+            key="bold-toggle"
+            value="bold"
+            onClick={() =>
+                props.changeState({
+                    ...props.state,
+                    isBold: !props.state.isBold,
+                })
+            }
+        >
+            <Typography sx={textStyle}>Жирный</Typography>
+        </ToggleButton>,
     ];
 }
+
 
 
 export const RichTextCellType: CellType = {
