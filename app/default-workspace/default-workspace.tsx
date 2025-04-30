@@ -24,7 +24,7 @@ import {
     Stack,
 } from "@mui/material";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import type { CollectionProps } from "~/collections/collection-infra";
+import type { CollectionProps, NotebookEntity, NotebookValue } from "~/collections/collection-infra";
 
 const DefaultWorkspace = (props: CollectionProps) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -353,3 +353,55 @@ const DefaultWorkspace = (props: CollectionProps) => {
 };
 
 export default DefaultWorkspace;
+
+function uuidv4(): string {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+            const r = (Math.random() * 16) | 0;
+            const v = c === "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        }
+    );
+}
+
+export const DefaultWorkspacePreview = () => {
+    const [notebooks, setNotebooks] = useState<NotebookEntity[]>([
+        { id: "1", title: "New notebook!", desctiprion: "description" },
+        { id: "2", title: "New notebook!", desctiprion: "description" },
+        { id: "3", title: "New notebook!", desctiprion: "description" },
+        { id: "4", title: "New notebook!", desctiprion: "description" },
+        { id: "5", title: "New notebook!", desctiprion: "description" },
+    ]);
+
+    function createNotebook(n: NotebookValue) {
+        setNotebooks([
+            ...notebooks,
+            { id: uuidv4(), title: n.title, desctiprion: n.desctiprion },
+        ]);
+    }
+
+    function removeNotebook(notebookId: string) {
+        setNotebooks(notebooks.filter((n) => n.id !== notebookId));
+    }
+
+    function deleteNotebook(notebookId: string) {
+        setNotebooks(notebooks.filter((n) => n.id !== notebookId));
+    }
+
+    function updateNotebook(notebook: NotebookEntity) {
+        setNotebooks(
+            notebooks.map((n) => (n.id === notebook.id ? notebook : n))
+        );
+    }
+
+    return (
+        <DefaultWorkspace
+            notebooks={notebooks}
+            createNotebook={createNotebook}
+            removeNotebook={removeNotebook}
+            deleteNotebook={deleteNotebook}
+            updateNotebook={updateNotebook}
+        ></DefaultWorkspace>
+    );
+}

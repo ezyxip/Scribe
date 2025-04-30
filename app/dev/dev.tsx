@@ -1,5 +1,7 @@
-import { LowerSection } from "./dev_for_code";
+import { AuthByPassPreview } from "~/auth-by-pass/auth-by-pass";
 
-export default function Preview() {
-  return <LowerSection />;
+
+
+export default function Dev(){
+    return <> Hehehe </>
 }
