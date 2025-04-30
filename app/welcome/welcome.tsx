@@ -1,4 +1,5 @@
-import { Container, Box, Typography, CircularProgress, Button } from "@mui/material";
+import { Container, Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -6,7 +7,14 @@ import logoLight from "./logo-light.svg";
 
 export function Welcome() {
   return (
-    <Container maxWidth="md">
+    <Container 
+      maxWidth="md"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh", // Растягиваем контейнер на всю высоту экрана
+      }}>
       <Box
         sx={{
           marginTop: 8,
@@ -28,37 +36,25 @@ export function Welcome() {
           эффективным.
         </Typography>
 
-        {/* Уведомление о разработке */}
-        <Box
+        {/* Кнопка для создания документа */}
+        <Box sx={{ marginTop: 4 }}>
+        <Button
+          variant="contained"
+          size="large"
+          component={Link}
+          to="/document"
           sx={{
-            marginTop: 4,
-            padding: 3,
-            backgroundColor: "background.paper",
-            borderRadius: 2,
-            boxShadow: 1,
+            backgroundColor: "black",
+            color: "white",
+            boxShadow: 3,
+            "&:hover": {
+              backgroundColor: "#1c1c1c",
+              boxShadow: 6,
+            },
           }}
         >
-          <Typography
-            variant="h6"
-            component="p"
-            color="text.secondary"
-            paragraph
-          >
-            🚧 Сервис находится в стадии активной разработки. Следите за
-            обновлениями!
-          </Typography>
-          <CircularProgress size={24} sx={{ marginTop: 2 }} />
-        </Box>
-
-        {/* Кнопка для подписки на обновления */}
-        <Box sx={{ marginTop: 4 }}>
-          <Button
-            variant="contained"
-            size="large"
-            disabled // Кнопка пока неактивна
-          >
-            Уведомить о запуске
-          </Button>
+          Перейти к созданию документа
+        </Button>
         </Box>
       </Box>
     </Container>
