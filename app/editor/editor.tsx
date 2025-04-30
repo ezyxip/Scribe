@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { TopPanel } from "./top-panel";
 import type { Cell } from "~/cell/cell-ui";
 import BottomPanel from "./bottom-panel";
+import { useCellTypes } from "~/cell/cell-infra";
 
 export type EditorProps = {
     title: string;
@@ -23,8 +24,8 @@ export function Editor({
 
     const commonState = cellsState.reduce((acc, cell) => {
         acc[cell.id] = cell.state;
-            return acc;
-        }, {} as Record<string, any>)
+        return acc;
+    }, {} as Record<string, any>);
 
     let addCellHandler = (cell: Cell, index: number) => {
         const newCells = [...cellsState];
@@ -110,7 +111,7 @@ export function Editor({
     return (
         <Container>
             {panel}
-            <Box sx={{height: "3em"}}/>
+            <Box sx={{ height: "3em" }} />
             <TextField
                 fullWidth
                 value={title}
@@ -131,8 +132,37 @@ export function Editor({
                     />
                 </Paper>
             ))}
-            <Box sx={{height: "50vh"}}/>
-            <BottomPanel addCell={(c: Cell) => addCellHandler(c, cells.length)} />
+            <Box sx={{ height: "50vh" }} />
+            <BottomPanel
+                addCell={(c: Cell) => addCellHandler(c, cells.length)}
+            />
         </Container>
     );
 }
+
+export const EditorPreview = () => {
+    const [title, setTitle] = useState("New notebook!");
+    const cellTypes = useCellTypes();
+    const plainText = cellTypes["plain-text"];
+    const richText = cellTypes["rich-text"];
+
+    const [cells, setCells] = useState<Cell[]>([]);
+
+    <Grid2 container spacing={2} justifyContent={"center"}>
+        <Grid2 size={{ xs: 12, sm: 6 }}>
+            <Editor
+                title={title}
+                setTitle={setTitle}
+                cells={cells}
+                deleteCell={(id) => setCells(cells.filter((c) => c.id !== id))}
+                addCell={(cell, index) =>
+                    setCells([
+                        ...cells.slice(0, index),
+                        cell,
+                        ...cells.slice(index),
+                    ])
+                }
+            />
+        </Grid2>
+    </Grid2>;
+};

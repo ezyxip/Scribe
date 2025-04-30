@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
+import { AuthByPassPreview } from "~/auth-by-pass/auth-by-pass";
 
-export default function Preview(){
-    return(
-        <Button variant="contained">Hehhehe</Button>
-    )
+
+
+export default function Dev(){
+    return <AuthByPassPreview/>
 }
